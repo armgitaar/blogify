@@ -1,0 +1,171 @@
+#!/usr/bin/env bash
+
+APP_NAME="__APP_NAME__"
+
+cecholn() {
+  RED="\033[0;31m"
+  GREEN='\033[0;32m'
+  YELLOW='\033[1;33m'
+  BLUE='\033[1;34m'
+
+  NC='\033[0m' # No Color
+
+  printf "${!1}${2} ${NC}\n"
+}
+
+cecho() {
+  RED="\033[0;31m"
+  GREEN='\033[0;32m'
+  YELLOW='\033[1;33m'
+  BLUE='\033[1;34m'
+  NC='\033[0m' # No Color
+
+  printf "${!1}${2} ${NC}"
+}
+
+install() {
+  cecholn "BLUE" "Building $APP_NAME..."
+  if ./gradlew "$@" installdist; then
+    cecholn "GREEN" "🙌 Done!"
+  else
+    cecholn "RED" "😿 Failed!"
+  fi
+}
+
+build() {
+  cecholn "BLUE" "Building $APP_NAME..."
+  if ./gradlew build -q >/dev/null 2>&1; then
+    cecholn "GREEN" "🙌 Done!"
+  else
+    cecholn "RED" "😿 Failed!"
+  fi
+}
+
+buildJar() {
+  cecholn "BLUE" "Building $APP_NAME jar..."
+  if ./gradlew shadowJar >/dev/null 2>&1; then
+    cecholn "GREEN" "🙌 Done!"
+  else
+    cecholn "RED" "😿 Failed!"
+  fi
+}
+
+runApp() {
+    MY_PATH=$(dirname "$0")
+    MY_PATH=$( (cd "$MY_PATH" && pwd))
+    APP_PATH="${MY_PATH}"
+
+    export alpas_run_mode="console"
+    export alpas_root_dir="$APP_PATH"
+
+    ./gradlew run -q --args="$*" #>/dev/null 2>&1
+
+    unset alpas_run_mode
+    unset alpas_root_dir
+}
+
+checkJava() {
+    java=$(command -v java)
+    cecholn "BLUE" " Making sure the correct version of Java is installed..."
+    if [[ "$java" ]]; then
+        _java=java
+    elif [[ -n "$JAVA_HOME" ]] && [[ -x "$JAVA_HOME/bin/java" ]];  then
+        _java="$JAVA_HOME/bin/java"
+    else
+        cecholn "RED" " Java not found. Make sure to install the proper version: https://alpas.dev/docs/installation"
+        exit 1
+    fi
+
+    if [[ "$_java" ]]; then
+        full_version=$("$_java" -version 2>&1 | head -1 | cut -d'"' -f2)
+        version=$("$_java" -version 2>&1 | head -1 | cut -d'"' -f2 | sed '/^1\./s///' | cut -d'.' -f1)
+        if [[ "$version" -gt "8" ]]; then
+            cecholn "GREEN" " Found supported Java version $full_version! 👍"
+        else
+            cecholn "RED" " Unsupported Java version $full_version. Make sure to install the proper version: https://alpas.dev/docs/installation"
+            exit 1
+        fi
+    fi
+}
+
+if [[ $# -eq 1 ]]; then
+  case "$1" in
+  init)
+    cecholn "RED" " Oops! I need your app name."
+    printf " Please provide app's full name. The command should be something like:"
+    cecholn "GREEN" " ./alpas init com.example.blog"
+    ;;
+  watch)
+    shift;
+    ./gradlew run -t --quiet "$@"
+    ;;
+  build)
+    build
+    ;;
+  run)
+    shift;
+    ./gradlew run --quiet "$@"
+    ;;
+  serve)
+    shift;
+    ./gradlew run --quiet "$@"
+    ;;
+  help)
+    runApp --help
+    ;;
+  list)
+    runApp --help
+    ;;
+  jar)
+    buildJar
+    ;;
+  *)
+    runApp "$@"
+    ;;
+  esac
+elif [[ $1 == *"init"* ]]; then
+  if [ -f ./.env ]; then
+    cecho "RED" " Oops!"
+    echo "Looks like your app is already crafted."
+  else
+    cecholn "BLUE" " Crafting your app...\n"
+
+    # todo: check that the proper versions of Gradle is installed
+    checkJava
+    gradle wrapper >/dev/null 2>&1
+    chmod +x ./gradlew
+    ./gradlew >/dev/null 2>&1
+
+    cecholn "BLUE" " Copying .env file..."
+    cp ./.env.example ./.env
+
+    # todo: replace perl with bash
+    perl -p -i -e 's/__PACKAGE__/'"$2"'/g' `grep -Ril --exclude-dir=node_modules --exclude-dir=.gradle --exclude-dir=.idea  __PACKAGE__ .`
+    app_name="${2##*.}"
+    perl -p -i -e 's/__APP_NAME__/'"${app_name}"'/g' `grep -Ril --exclude-dir=node_modules --exclude-dir=.gradle --exclude-dir=.idea  __APP_NAME__ .`
+
+    cecholn "BLUE" " Generating your app key..."
+    app_key=$(env LC_CTYPE=C tr -dc "A-Za-z0-9_$%^&*()-+=" </dev/urandom | head -c 32 | base64)
+    perl -p -i -e 's/__APP_KEY__/'"base64:${app_key}"'/g' `grep -l __APP_KEY__ .env`
+
+    cecholn "BLUE" " Building your app..."
+    cecholn "NC" " This will take a few seconds."
+    rm -rf ./build
+    rm -rf ./out
+    gradle build --quiet >/dev/null 2>&1
+    build --quiet >/dev/null 2>&1
+
+    cecholn "BLUE" " Linking src/main/resources/web folder..."
+    ./alpas link:web --quiet
+    cecholn "BLUE" " Linking src/main/resources/templates folder..."
+    ./alpas link:templates --quiet
+
+    printf "\n"
+    cecholn "GREEN" " ✓ Your app is crafted!\n"
+    cecholn "NC" " Run ./alpas serve to serve your app."
+    cecholn "NC" " Run ./alpas help to see all the available Alpas commands.\n"
+    cecholn "YELLOW" " Don't forget to checkout the docs: https://alpas.dev/docs"
+  fi
+else
+  runApp "$@"
+fi
