@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <title> - The Rapid and Delightful Kotlin Web Framework</title>
+
+</head>
+
+<body class="antialiased bg-gray-200 h-full text-lg text-gray-800 is-preload">
+<form method="get" action="{{ route('blog.edit', {"id": blogId}) }}">
+{% csrf %}
+
+      <button type="submit">
+          Edit
+      </button>
+</form>
+
+<form method="get" action="/blog/new">
+    <button type="submit">
+        New
+    </button>
+</form>
+
+
+<h1 class="text-3xl my-16 text-gray-700 uppercase font-medium">{{ title }}</h1>
+{{ author }}
+{{ date }}
+{{ tags }}
+{{ content | raw }}
+
+
+
+</body>
+</html>

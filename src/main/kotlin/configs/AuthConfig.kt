@@ -1,6 +1,6 @@
-package __PACKAGE__.configs
+package com.blog.blogify.configs
 
-import __PACKAGE__.entities.Users
+import com.blog.blogify.entities.Users
 import dev.alpas.Environment
 import dev.alpas.auth.SessionAuthChannel
 import dev.alpas.auth.AuthConfig as BaseConfig

@@ -1,4 +1,4 @@
-package __PACKAGE__.entities
+package com.blog.blogify.entities
 
 import dev.alpas.auth.BaseUser
 import dev.alpas.auth.BaseUsersTable

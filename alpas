@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-APP_NAME="__APP_NAME__"
+APP_NAME="blogify"
 
 cecholn() {
   RED="\033[0;31m"
@@ -140,9 +140,9 @@ elif [[ $1 == *"init"* ]]; then
     cp ./.env.example ./.env
 
     # todo: replace perl with bash
-    perl -p -i -e 's/__PACKAGE__/'"$2"'/g' `grep -Ril --exclude-dir=node_modules --exclude-dir=.gradle --exclude-dir=.idea  __PACKAGE__ .`
+    perl -p -i -e 's/com.blog.blogify/'"$2"'/g' `grep -Ril --exclude-dir=node_modules --exclude-dir=.gradle --exclude-dir=.idea  com.blog.blogify .`
     app_name="${2##*.}"
-    perl -p -i -e 's/__APP_NAME__/'"${app_name}"'/g' `grep -Ril --exclude-dir=node_modules --exclude-dir=.gradle --exclude-dir=.idea  __APP_NAME__ .`
+    perl -p -i -e 's/blogify/'"${app_name}"'/g' `grep -Ril --exclude-dir=node_modules --exclude-dir=.gradle --exclude-dir=.idea  blogify .`
 
     cecholn "BLUE" " Generating your app key..."
     app_key=$(env LC_CTYPE=C tr -dc "A-Za-z0-9_$%^&*()-+=" </dev/urandom | head -c 32 | base64)

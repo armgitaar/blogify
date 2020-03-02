@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <title> - The Rapid and Delightful Kotlin Web Framework</title>
+
+</head>
+
+<body class="antialiased bg-gray-200 h-full text-lg text-gray-800 is-preload">
+<div>
+    <div>
+        <form method="post" action="">
+        {% csrf %}
+            <input type="hidden" name="_method" value="patch"/>
+              <button type="submit">
+                  Back
+              </button>
+        </form>
+        <form method="post" action="{{ route('blog.update', {"id": blogId}) }}">
+        {% csrf %}
+            <input type="hidden" name="_method" value="patch"/>
+            <button type="submit">
+                Save
+            </button>
+
+            <div>
+                <textarea name="content" rows="40" cols="100">
+{{ content | raw }}
+                </textarea>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

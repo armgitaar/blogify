@@ -1,4 +1,4 @@
-package __PACKAGE__.controllers
+package com.blog.blogify.controllers
 
 import dev.alpas.http.HttpCall
 import dev.alpas.routing.Controller

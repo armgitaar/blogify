@@ -1,7 +1,9 @@
-package __PACKAGE__
+package com.blog.blogify
 
 import dev.alpas.Application
 import dev.alpas.ServiceProvider
+import com.blog.blogify.providers.JedisServiceProvider
+import com.blog.blogify.providers.BlogServiceProvider
 import dev.alpas.encryption.EncryptionServiceProvider
 import dev.alpas.hashing.HashServiceProvider
 import dev.alpas.http.HttpKernel
@@ -25,6 +27,8 @@ class HttpKernel : HttpKernel() {
             RouteServiceProvider::class,
             ViewServiceProvider::class,
             OzoneServiceProvider::class,
+            JedisServiceProvider::class,
+            BlogServiceProvider::class,
             QueueServiceProvider::class
         )
     }

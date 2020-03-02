@@ -1,6 +1,6 @@
-package __PACKAGE__.database.migrations
+package com.blog.blogify.database.migrations
 
-import __PACKAGE__.entities.Users
+import com.blog.blogify.entities.Users
 import dev.alpas.auth.PasswordResetTokens
 import dev.alpas.ozone.migration.Migration
 
