@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Alpas - The Rapid and Delightful Kotlin Web Framework</title>
+    <title>Alpas Blog - The best blog in the Galaxy</title>
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 </head>
@@ -18,7 +18,7 @@
         <p class="text-white font-extrabold text-3xl md:text-5xl">
             Alpas Blog
         </p>
-        <p class="text-xl md:text-2xl text-gray-500">Best blog in the galaxy</p>
+        <p class="text-xl md:text-2xl text-gray-500">The best blog in the Galaxy</p>
     </div>
 </div>
 
@@ -34,16 +34,10 @@
                 <div class="flex w-1/2 pl-4 text-sm">
                     <ul class="list-reset flex justify-between flex-1 md:flex-none items-center">
                         <li class="mr-2">
-                            <a class="inline-block py-2 px-2 text-white no-underline hover:underline" href="post.html">POST</a>
+                            <a class="inline-block py-2 px-2 text-white no-underline hover:underline" href="/">Home</a>
                         </li>
                         <li class="mr-2">
-                            <a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-2" href="#">LINK</a>
-                        </li>
-                        <li class="mr-2">
-                            <a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-2" href="#">LINK</a>
-                        </li>
-                        <li class="mr-2">
-                            <a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-2" href="post_vue.html">POST_VUE</a>
+                            <a class="inline-block py-2 px-2 text-white no-underline hover:underline" href="/blog/new">New Post</a>
                         </li>
                     </ul>
                 </div>
@@ -97,38 +91,10 @@
     <div class="container max-w-6xl mx-auto flex items-center px-2 py-8">
 
         <div class="w-full mx-auto flex flex-wrap items-center">
-            <div class="flex w-full md:w-1/2 justify-center md:justify-start text-white font-extrabold">
-                <a class="text-gray-900 no-underline hover:text-gray-900 hover:no-underline" href="#">
-                    👻 <span class="text-base text-gray-200">Ghostwind CSS</span>
-                </a>
-            </div>
-            <div class="flex w-full pt-2 content-center justify-between md:w-1/2 md:justify-end">
-                <ul class="list-reset flex justify-center flex-1 md:flex-none items-center">
-                    <li>
-                        <a class="inline-block py-2 px-3 text-white no-underline" href="#">Active</a>
-                    </li>
-                    <li>
-                        <a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-3" href="#">link</a>
-                    </li>
-                    <li>
-                        <a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-3" href="#">link</a>
-                    </li>
-                    <li>
-                        <a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-3" href="#">link</a>
-                    </li>
-                </ul>
-            </div>
+
         </div>
     </div>
 </footer>
 
-<script src="https://unpkg.com/popper.js@1/dist/umd/popper.min.js"></script>
-<script src="https://unpkg.com/tippy.js@4"></script>
-<script>
-		//Init tooltips
-		tippy('.avatar')
-	</script>
 </body>
-
-<body>
 </html>

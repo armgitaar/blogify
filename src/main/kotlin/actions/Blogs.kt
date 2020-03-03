@@ -5,7 +5,8 @@ import com.vladsch.flexmark.ext.tables.TablesExtension
 import com.vladsch.flexmark.html.HtmlRenderer
 import com.vladsch.flexmark.parser.Parser
 import com.vladsch.flexmark.util.data.MutableDataSet
-import com.vladsch.flexmark.ext.jekyll.front.matter.JekyllFrontMatterExtension
+import com.vladsch.flexmark.ext.yaml.front.matter.AbstractYamlFrontMatterVisitor
+import com.vladsch.flexmark.ext.yaml.front.matter.YamlFrontMatterExtension
 import dev.alpas.*
 import redis.clients.jedis.JedisPool
 import java.io.File
@@ -49,10 +50,13 @@ class Blogs(
     fun readSource(content: String): blogData {
 
         var markData = content
-        //val theTitle = markData.title
-        println(markData)
 
-        JekyllFrontMatterExtension.create()
+
+        /*Node document = PARSER.parse(input);
+        visitor.visit(document);
+        println(theTitle)*/
+
+        //JekyllFrontMatterExtension.create()
             /*resourceLoader.load(blogsPath("$page.md"))
             ?.readText()
             .orAbort("Page $page not found!")*/
@@ -102,7 +106,7 @@ class Blogs(
 class Markdown {
     private val options by lazy {
         MutableDataSet().apply {
-            set(Parser.EXTENSIONS, listOf(AutolinkExtension.create(), TablesExtension.create(), JekyllFrontMatterExtension.create()))
+            set(Parser.EXTENSIONS, listOf(AutolinkExtension.create(), TablesExtension.create(), YamlFrontMatterExtension.create()))
             set(HtmlRenderer.HARD_BREAK, "<br />\n")
             set(HtmlRenderer.RENDER_HEADER_ID, true)
             set(TablesExtension.CLASS_NAME, "pure-table pure-table-striped")

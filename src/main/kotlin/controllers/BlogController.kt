@@ -25,6 +25,11 @@ class BlogController : Controller() {
             val id = x.id
             val content = x.content
             var (markData, title, author, date, image, tags) = blog.readSource(content!!)
+
+            val re = Regex("#*")
+            markData = re.replace(markData, "")
+
+            markData = markData.substring(0, Math.min(markData.length, 100)) + " ..."
             val list = mutableListOf<Any>(id, markData, title, author, date, image, tags)
             blogsList.add(list)
         }
@@ -41,6 +46,7 @@ class BlogController : Controller() {
         val markBlog = blogData[0].second
         var (markData, title, author, date, image, tags) = blog.readSource(markBlog!!)
         var content = blog.convert(markData)
+        println(content)
 
         call.render("blog", mapOf("blogId" to blogId, "markBlog" to markBlog, "content" to content, "title" to title, "page" to page,
             "author" to author, "date" to date, "image" to image, "tags" to tags))
@@ -65,6 +71,8 @@ class BlogController : Controller() {
             }
             call.redirect().back()
         }
+
+        flash("success", "Successfully Saved")
 
     }
     fun new(call: HttpCall) {
