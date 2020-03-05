@@ -123,6 +123,9 @@ class BlogController : Controller() {
     private fun getBlogs(previousPage: Int, currentPage: Int): MutableList<Any> {
         var previous = previousPage * 9
         var current = previous + 9
+
+        //TODO - figure out why more than 9 results appear on page 2 when there are 19+ blog post entries...
+
         var blogs = BlogData.latest().drop(previous).take(current).toList()
 
         var blogsList = mutableListOf<Any>()

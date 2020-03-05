@@ -57,8 +57,8 @@
                             </div>
                             <div class="font-serif text-base px-6 mb-5 mt-2">
                                 <textarea name="content" rows="40" cols="100" style="outline: none !important">{%  include 'marked.peb' %}</textarea>
-                                <textarea name="content" rows="40" cols="100" style="outline: none !important">{{ old("content", "this is a placeholdr") }}</textarea>
-
+                                <!--  TODO - figure out how to show old input data so validation doesn't erase it
+                                <textarea name="content" rows="40" cols="100" style="outline: none !important">{{ old("content", "this is a placeholdr") }}</textarea> -->
                             </div>
                         </form>
                     </div>
