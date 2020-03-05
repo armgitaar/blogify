@@ -16,11 +16,13 @@ fun Router.addRoutes() = apply {
 
 private fun RouteGroup.webRoutesGroup() {
     get("/", BlogController::index).name("welcome")
-    get("blog/<page>", BlogController::show).name("blog.show")
+    get("/<page>", BlogController::pages).name("pages")
+    get("blog/<id>/<page>", BlogController::show).name("blog.show")
     get("blog/new", BlogController::new).name("blog.new")
     post("blog/submit", BlogController::submit).name("blog.submit")
     get("blog/edit/<id>", BlogController::edit).name("blog.edit")
     patch("blog/edit/<id>", BlogController::update).name("blog.update")
+    delete("blog/<id>", BlogController::delete).name("blog.delete")
 }
 
 private fun Router.apiRoutes() {

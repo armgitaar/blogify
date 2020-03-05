@@ -12,7 +12,6 @@
 
 <body class="bg-gray-200 font-sans leading-normal tracking-normal">
 
-<!-- This section displays the flash messages received from TaskController -->
 <div class="container-fluid fixed w-full flex justify-center">
 {% if hasFlash('success') %}
     <div class="w-1/3 text-white bg-green-500 py-2 px-10 text-center" id="flash">
@@ -21,38 +20,14 @@
 {% endif %}
 </div>
 
-<!--Header-->
-<div class="w-full m-0 p-0 bg-cover bg-bottom" style="background-image:url('https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80'); height: 60vh; max-height:460px;">
-    <div class="container max-w-4xl mx-auto pt-16 md:pt-32 text-center break-normal">
-        <!--Title-->
-        <p class="text-white font-extrabold text-3xl md:text-5xl">
-            Alpas Blog
-        </p>
-        <p class="text-xl md:text-2xl text-gray-500">The best blog in the Galaxy</p>
-    </div>
-</div>
+{% include '_header.peb' %}
 
 <!--Container-->
 <div class="container px-4 md:px-0 max-w-6xl mx-auto -mt-32">
 
     <div class="mx-0 sm:mx-6">
 
-        <!--Nav-->
-        <nav class="mt-0 w-full">
-            <div class="container mx-auto flex items-center">
-
-                <div class="flex w-1/2 pl-4 text-sm text-white">
-                    <ul class="list-reset flex justify-between flex-1 md:flex-none items-center">
-                        <li class="mr-2">
-                            <a class="inline-block py-2 px-2 text-white no-underline hover:underline" href="/">Home</a>
-                        </li>
-                        <li class="mr-2">
-                            <a class="inline-block py-2 px-2 text-white no-underline hover:underline" href="/blog/new">New Post</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+    {% include '_nav.peb' %}
 
         <div class="bg-gray-200 w-full text-xl md:text-2xl text-gray-800 leading-normal rounded-t">
 
@@ -87,14 +62,7 @@
 </div>
 
 
-<footer class="bg-gray-900">
-    <div class="container max-w-6xl mx-auto flex items-center px-2 py-8">
-
-        <div class="w-full mx-auto flex flex-wrap items-center">
-
-        </div>
-    </div>
-</footer>
+{% include '_footer.peb' %}
 
 <script>
   $(document).ready(function() {

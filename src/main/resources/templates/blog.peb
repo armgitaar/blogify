@@ -12,38 +12,14 @@
 
 <body class="bg-gray-200 font-sans leading-normal tracking-normal">
 
-<!--Header-->
-<div class="w-full m-0 p-0 bg-cover bg-bottom" style="background-image:url('https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80'); height: 60vh; max-height:460px;">
-    <div class="container max-w-4xl mx-auto pt-16 md:pt-32 text-center break-normal">
-        <!--Title-->
-        <p class="text-white font-extrabold text-3xl md:text-5xl">
-            Alpas Blog
-        </p>
-        <p class="text-xl md:text-2xl text-gray-500">The best blog in the Galaxy</p>
-    </div>
-</div>
+{% include '_header.peb' %}
 
 <!--Container-->
 <div class="container px-4 md:px-0 max-w-6xl mx-auto -mt-32">
 
     <div class="mx-0 sm:mx-6">
 
-        <!--Nav-->
-        <nav class="mt-0 w-full">
-            <div class="container mx-auto flex items-center">
-
-                <div class="flex w-1/2 pl-4 text-sm text-white">
-                    <ul class="list-reset flex justify-between flex-1 md:flex-none items-center">
-                        <li class="mr-2">
-                            <a class="inline-block py-2 px-2 text-white no-underline hover:underline" href="/">Home</a>
-                        </li>
-                        <li class="mr-2">
-                            <a class="inline-block py-2 px-2 text-white no-underline hover:underline" href="/blog/new">New Post</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+    {% include '_nav.peb' %}
 
         <div class="bg-gray-200 w-full text-xl md:text-2xl text-gray-800 leading-normal rounded-t">
 
@@ -61,13 +37,24 @@
                                 <strong>{{ author }}</strong> - {{ date }}
                             </p>
                             </div>
-                            <div class="px-6 -mt-2">
-                                <form method="get" action="{{ route('blog.edit', {"id": blogId}) }}">
-                                {% csrf %}
-                                    <button type="submit" class="uppercase text-sm align-middle text-blue-500 hover:text-blue-800">
-                                        Edit
-                                    </button>
-                                </form>
+                            <div class="px-6 -mt-2 flex">
+                                <div class="mr-4">
+                                    <form method="get" action="{{ route('blog.edit', {"id": blogId}) }}">
+                                    {% csrf %}
+                                        <button type="submit" class="uppercase text-sm align-middle text-blue-500 hover:text-blue-800">
+                                            Edit
+                                        </button>
+                                    </form>
+                                </div>
+                                <div>
+                                    <form method="POST" action="{{ route('blog.delete', {"id": blogId}) }}">
+                                    {% csrf %}
+                                        <input type="hidden" name="_method" value="delete"/>
+                                        <button type="submit" class="uppercase text-sm align-middle text-red-500 hover:text-blue-800">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                         <div class="w-full font-bold text-xl text-gray-900 px-6 mt-2">
@@ -90,19 +77,37 @@
             </div>
             <!--/ Post Content-->
 
+            <!-- Pagination -->
+            <div class="w-full flex justify-between px-4 -mt-6 text-base">
+                <div>
+                    {% if pagination.hasPrevious() %}
+                        <a href="/blog/{{ pagination.previousUrl }}/-" class="p-4 inline-flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="16px" viewBox="0 0 448 512">
+                                <path fill="currentColor"
+                                      d="M229.9 473.899l19.799-19.799c4.686-4.686 4.686-12.284 0-16.971L94.569 282H436c6.627 0 12-5.373 12-12v-28c0-6.627-5.373-12-12-12H94.569l155.13-155.13c4.686-4.686 4.686-12.284 0-16.971L229.9 38.101c-4.686-4.686-12.284-4.686-16.971 0L3.515 247.515c-4.686 4.686-4.686 12.284 0 16.971L212.929 473.9c4.686 4.686 12.284 4.686 16.971-.001z"/>
+                            </svg>
+                            <span class="ml-2">Previous Post</span>
+                        </a>
+                    {% endif %}
+                </div>
+                <div>
+                    {% if pagination.hasNext() %}
+                        <a href="/blog/{{ pagination.nextUrl }}/-" class="p-4 inline-flex items-center">
+                            <span class="mr-2">Next Post</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="16px" viewBox="0 0 448 512">
+                                <path fill="currentColor" d="M218.101 38.101L198.302 57.9c-4.686 4.686-4.686 12.284 0 16.971L353.432 230H12c-6.627 0-12 5.373-12 12v28c0 6.627 5.373 12 12 12h341.432l-155.13 155.13c-4.686 4.686-4.686 12.284 0 16.971l19.799 19.799c4.686 4.686 12.284 4.686 16.971 0l209.414-209.414c4.686-4.686 4.686-12.284 0-16.971L235.071 38.101c-4.686-4.687-12.284-4.687-16.97 0z"/>
+                            </svg>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            <!-- / Pagination -->
+
         </div>
     </div>
 </div>
 
-
-<footer class="bg-gray-900">
-    <div class="container max-w-6xl mx-auto flex items-center px-2 py-8">
-
-        <div class="w-full mx-auto flex justify-center text-white hover:text-yellow-400">
-            <a href="https://alpas.dev" target="_blank">Alpas</a>
-        </div>
-    </div>
-</footer>
+{% include '_footer.peb' %}
 
 </body>
 </html>

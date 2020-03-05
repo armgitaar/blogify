@@ -1,0 +1,16 @@
+<!--Nav-->
+<nav class="mt-0 w-full">
+    <div class="container mx-auto flex items-center">
+
+        <div class="flex w-full pl-4 text-sm">
+            <ul class="list-reset flex justify-between flex-1">
+                <li class="mr-2">
+                    <a class="inline-block py-2 px-2 text-white no-underline hover:underline" href="/">Home</a>
+                </li>
+                <li class="mr-2 text-right">
+                    <a class="inline-block py-2 px-2 text-white no-underline hover:underline" href="/blog/new">New Post</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
