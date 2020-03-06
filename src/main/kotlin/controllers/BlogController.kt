@@ -18,6 +18,8 @@ import me.liuwj.ktorm.entity.filter
 import me.liuwj.ktorm.entity.map
 import me.liuwj.ktorm.dsl.update
 import me.liuwj.ktorm.entity.toList
+import java.io.File
+import java.io.InputStream
 import com.blog.blogify.entities.Blogs as BlogData
 
 class BlogController : Controller() {
@@ -86,7 +88,9 @@ class BlogController : Controller() {
     }
 
     fun new(call: HttpCall) {
-        call.render("new")
+        val inputStream: InputStream = File("src/main/resources/templates/marked.peb").inputStream()
+        val placeholder = inputStream.bufferedReader().use { it.readText() }
+        call.render("new", mapOf("placeholder" to placeholder))
     }
 
     fun submit(call: HttpCall) {
