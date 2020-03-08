@@ -27,7 +27,6 @@ class HttpKernel : HttpKernel() {
             RouteServiceProvider::class,
             ViewServiceProvider::class,
             OzoneServiceProvider::class,
-            JedisServiceProvider::class,
             BlogServiceProvider::class,
             QueueServiceProvider::class
         )

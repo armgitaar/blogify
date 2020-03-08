@@ -1,6 +1,5 @@
 package com.blog.blogify
 
-import com.blog.blogify.controllers.WelcomeController
 import com.blog.blogify.controllers.BlogController
 import dev.alpas.routing.RouteGroup
 import dev.alpas.routing.Router

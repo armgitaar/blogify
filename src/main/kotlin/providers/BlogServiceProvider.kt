@@ -14,6 +14,6 @@ class BlogServiceProvider() : ServiceProvider {
     override fun boot(app: Application) {
         // do some initial setup here
         // Feel free to ask for any dependencies here as they should be all registered by now.
-        app.bind(Blogs(app.make(), app.make(), app.make()))
+        app.bind(Blogs(app.make()))
     }
 }
