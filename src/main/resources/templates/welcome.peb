@@ -33,6 +33,7 @@
             <!--Posts Container-->
             <div class="flex flex-wrap justify-between">
 
+                <!-- This for loop goes through the blog posts to be presented on the page and displays the title, author, date, tags, and first 100 words of blog post -->
                 {% for blog in blogs %}
 
                 <!-- blog post -->

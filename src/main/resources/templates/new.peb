@@ -56,6 +56,9 @@
                                 </button>
                             </div>
                             <div class="font-serif text-base px-6 mb-5 mt-2">
+                                <!-- The 'old()' function will persist content after failed validations to keep the user happy.
+                                The first value 'content' matches the name applied to the text area which gets passed to the back-end and 'placeholder
+                                 is the placeholder text that was passed to this template which points to the content in the marked.peb file -->
                                 <textarea name="content" rows="40" cols="100" style="outline: none !important">{{ old("content", placeholder) }}</textarea>
                             </div>
                         </form>
@@ -79,6 +82,7 @@
 });
 </script>
 
+<!-- This is basic javascript to go back to previous URL; a similar functional can be created in the backend if desired  -->
 <script>
         function goBack() {
         window.history.back();
