@@ -1,3 +1,12 @@
+Blogify is an example of how you can make a blog using the [Alpas framework](https://alpas.dev). 
+
+I didn't use authentication in this project - though, that's just a couple more lines of code to add authentication for add/edit/delete actions. 
+
+Feel free to use as a base for your own blog project or as an exercise to become more familiar with some of the functionality in the Alpas Web Framework. 
+
+Below is the Alpas Starter template instructions this project was started from. 
+---
+
 ### Alpas - The Rapid and Delightful Kotlin Web Framework. Easy, elegant, and productive! 🚀
 
 >This repo is the starter template for the [Alpas web framework](https://alpas.dev). If you want to contribute to
