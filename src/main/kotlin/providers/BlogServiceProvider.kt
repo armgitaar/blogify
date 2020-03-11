@@ -2,7 +2,7 @@ package com.blog.blogify.providers
 
 import dev.alpas.Application
 import dev.alpas.ServiceProvider
-import com.blog.blogify.actions.Blogs
+import com.blog.blogify.actions.ParseBlog
 import dev.alpas.make
 
 class BlogServiceProvider() : ServiceProvider {
@@ -14,6 +14,6 @@ class BlogServiceProvider() : ServiceProvider {
     override fun boot(app: Application) {
         // do some initial setup here
         // Feel free to ask for any dependencies here as they should be all registered by now.
-        app.bind(Blogs(app.make()))
+        app.bind(ParseBlog(app.make()))
     }
 }

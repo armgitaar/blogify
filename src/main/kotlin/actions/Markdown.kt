@@ -7,7 +7,7 @@ import com.vladsch.flexmark.parser.Parser
 import com.vladsch.flexmark.util.data.MutableDataSet
 import dev.alpas.*
 
-class Blogs(
+class ParseBlog(
     private val env: Environment
 ) {
 
